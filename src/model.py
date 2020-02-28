@@ -3,7 +3,7 @@ from sqlalchemy.orm import relationship
 from .db import Base
 
 
-class Location(Base):
+class LocationBase(Base):
     __tablename__ = 'location'
     id = Column(Integer, primary_key=True)
     key = Column('key', String(20), index=True)
@@ -12,7 +12,12 @@ class Location(Base):
     city = Column('admin', String(40))
     place_name = Column('place_name', String(40))
     accuracy = Column('accuracy', Integer)
+
+class Location(LocationBase):
     distance = Column(FLOAT)
+
+
+
 
 
 

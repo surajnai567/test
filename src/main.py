@@ -27,12 +27,15 @@ def get_location(latitude: float, longitude: float, db: Session = Depends(get_db
 @app.post("/post_location/")
 def post_location(item: schema.LocationBase, db: Session = Depends(get_db)):
     item.pincode = "IN/" + item.pincode
-    items = crud.get_location_by_pincode(db, item.pincode)
-    # if pin code is not in db and min distance is 5
-    if len(items) == 0:
-        # add data to dbms
-        return item
-    return {"response": "location already exist"}
+    loc_by_pincode = crud.get_location_by_pincode(db, item.pincode)
+    nearby_locations = crud.get_all_loc_by_latitute_longitude(db, item.latitude, item.longitude)
+    # if pin code is not in db and db has no lat lot in 6 km
+
+    if len(loc_by_pincode) == 0 and len(nearby_locations[1:]) == 0:
+        data = crud.create_location(db, item)
+        return data
+    else:
+        return {"response": "location already in database"}
 
 """
 @app.get("/pincode/")

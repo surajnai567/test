@@ -38,4 +38,3 @@ where earth_distance(
 order by distance;
   """.format(latitude, longitude, latitude, longitude, range_in_km)
 
-

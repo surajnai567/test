@@ -6,7 +6,6 @@ class LocationBase(BaseModel):
     pincode: str
     latitude: float
     longitude: float
-    accuracy: int
     city: str
     address: str
 
