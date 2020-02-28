@@ -2,7 +2,7 @@
 from math import radians, cos, sin, asin, sqrt
 
 
-def distance(lat1, lat2, lon1, lon2):
+def _distance(lat1, lat2, lon1, lon2):
     """calcute distance between two points"""
     # radians which converts from degrees to radians.
     lon1 = radians(lon1)
@@ -21,3 +21,12 @@ def distance(lat1, lat2, lon1, lon2):
 
     # calculate the result
     return (c * r)
+
+
+def get_distance_within_km(from_lat, from_long, location, range=5):
+    if isinstance(location[1], float) and isinstance(location[2], float):
+        if _distance(location[1], from_lat, location[2], from_long) < 6:
+            return True
+    else:
+        return False
+

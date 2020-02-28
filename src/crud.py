@@ -42,3 +42,8 @@ def _get_all_loc_by_latitute_longitude(db: Session, latitude, longitude):
         .from_statement(text(static.get_distance_by_lat_lon(latitude, longitude))).one()
     return locations
 
+def get_all_location(db: Session):
+    data = db.query(model.LocationBase.place_name, model.LocationBase.latitude,
+                    model.LocationBase.longitude).all()
+    return data
+

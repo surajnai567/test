@@ -4,6 +4,8 @@ from fastapi import Depends, FastAPI, HTTPException
 from sqlalchemy.orm import Session
 from src import crud, model, schema
 from src.db import SessionLocal, engine
+from src.utils.distance import get_distance_within_km
+from functools import partial
 
 model.Base.metadata.create_all(bind=engine)
 app = FastAPI()
@@ -50,3 +52,9 @@ def get_loc_pin(pincode: str, db: Session = Depends(get_db)):
 def get_loc_lat_long(latitude: float, longitude: float, db: Session = Depends(get_db)):
     item = crud.get_all_loc_by_latitute_longitude(db, latitude, longitude)
     return item[1:]
+
+@app.get("/get_using_self", response_model=List[schema.GetSelfLocation])
+def get_loc_by_self(latitude: float, longitude: float, db: Session = Depends(get_db)):
+    item = crud.get_all_location(db)
+    res = list(filter(partial(get_distance_within_km, latitude, longitude), item))
+    return res

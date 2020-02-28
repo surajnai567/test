@@ -38,3 +38,11 @@ class GetPostgresLocation(BaseModel):
 
     class Config:
         orm_mode = True
+
+class GetSelfLocation(BaseModel):
+    place_name: str
+    latitude: str
+    longitude: str
+
+    class Config:
+        orm_mode = True

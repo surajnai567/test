@@ -20,7 +20,7 @@ and earth_distance(
 order by distance;
 """.format(place_name, range_in_km)
 
-def get_distance_by_lat_lon(latitude, longitude, range_in_km = 10):
+def get_distance_by_lat_lon(latitude, longitude, range_in_km = 5):
     range_in_km = range_in_km * 1000
     return """
 create extension if not exists cube;
