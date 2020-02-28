@@ -17,6 +17,7 @@
  * get_location args: float, float Return: list of locations
  * post_location args:pin,city,address,lat,longitude
  * get_using_postgres args:float, float Return: List of location
+    * it fetch all location with in 5 km
  * get_using_self args: float, float Return: list of location
     * default range is 5 it can be change by changing the 
     get_distance_within_km() default range argument 
