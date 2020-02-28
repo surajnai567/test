@@ -20,3 +20,5 @@
  * get_using_self args: float, float Return: list of location
     * default range is 5 it can be change by changing the 
     get_distance_within_km() default range argument 
+    * this function is slower than get_using_postgres because it is depend
+    on python object comparision (first it fetch all record then use comparision)
