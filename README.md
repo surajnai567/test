@@ -13,7 +13,7 @@
  
  # ##############################################################
  
- ### api end-point
+ ### api end-points
  * get_location args: float, float Return: list of locations
  * post_location args:pin,city,address,lat,longitude
  * get_using_postgres args:float, float Return: List of location
