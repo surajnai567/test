@@ -17,6 +17,12 @@ class Location(LocationBase):
     distance = Column(FLOAT)
 
 
+class DetectedPlace(Base):
+    __tablename__ = 'geom'
+    id = Column(Integer, primary_key=True)
+    name = Column('name', String(20))
+    city = Column('city', String(20))
+    parent = Column('parent', String(20))
 
 
 

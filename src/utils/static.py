@@ -38,3 +38,14 @@ where earth_distance(
 order by distance;
   """.format(latitude, longitude, latitude, longitude, range_in_km)
 
+def insert_into_geom(property, coordinates):
+    return """
+    insert into geom(property, coordinate) values('{}',ST_GeomFromGeoJSON('{}'));
+    """.format(property, coordinates)
+
+def get_parent_city(latitude, longitude):
+    return """
+select property->'name' as name ,property -> 'parent' as parent
+from geom
+where ST_within(ST_SETSRID(ST_MAKEPOINT({}, {}),4326), ST_SETSRID(coordinate, 4326));
+""".format(longitude, latitude)

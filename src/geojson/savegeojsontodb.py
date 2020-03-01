@@ -32,7 +32,6 @@ class DBConnection:
             self._connection = psycopg2.\
                 connect(database=self.databse, user=self.username, password=self.password, host=self.hostname)
             self._cursor = self._connection.cursor()
-            print(type(self._connection))
             return self._cursor
 
         except:
@@ -45,12 +44,4 @@ class DBConnection:
             self._connection.close()
         except:
             pass
-
-a = DBConnection('test', 'postgres','daysunmon','127.0.0.1')
-cursor = a.connect()
-cursor.execute("select * from location limit 10;")
-for i in cursor.fetchall():
-    print(i)
-
-a.close()
 

@@ -36,14 +36,23 @@ def get_all_loc_by_latitute_longitude(db: Session, latitude, longitude):
         .from_statement(text(static.get_distance_by_lat_lon(latitude, longitude))).all()
     return locations
 
+
 def _get_all_loc_by_latitute_longitude(db: Session, latitude, longitude):
     locations = db.query(model.Location.place_name, model.Location.latitude,
                          model.Location.longitude, model.Location.distance)\
         .from_statement(text(static.get_distance_by_lat_lon(latitude, longitude))).one()
     return locations
 
+
 def get_all_location(db: Session):
     data = db.query(model.LocationBase.place_name, model.LocationBase.latitude,
                     model.LocationBase.longitude).all()
     return data
+
+
+def get_city_within(db: Session, latitude, longitude):
+    loc = db.query(model.DetectedPlace.name, model.DetectedPlace.parent)\
+        .from_statement(text(static.get_parent_city(latitude, longitude))).one()
+    return loc
+
 

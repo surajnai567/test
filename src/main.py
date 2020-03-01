@@ -1,5 +1,5 @@
 from typing import List
-
+import json
 from fastapi import Depends, FastAPI, HTTPException
 from sqlalchemy.orm import Session
 from src import crud, model, schema
@@ -48,13 +48,24 @@ def get_loc_pin(pincode: str, db: Session = Depends(get_db)):
     
 """
 
+
 @app.get("/get_using_postgres/", response_model=List[schema.GetPostgresLocation])
 def get_loc_lat_long(latitude: float, longitude: float, db: Session = Depends(get_db)):
     item = crud.get_all_loc_by_latitute_longitude(db, latitude, longitude)
     return item[1:]
+
 
 @app.get("/get_using_self", response_model=List[schema.GetSelfLocation])
 def get_loc_by_self(latitude: float, longitude: float, db: Session = Depends(get_db)):
     item = crud.get_all_location(db)
     res = list(filter(partial(get_distance_within_km, latitude, longitude), item))
     return res
+
+
+@app.get('/detect/')
+def get_detected_parent_city(latitude: float, longitude: float, db: Session = Depends(get_db)):
+    item = crud.get_city_within(db, latitude, longitude)
+    res = {'name': item[0], 'parent': item[1]}
+    return res
+
+
