@@ -55,7 +55,7 @@ def get_loc_lat_long(latitude: float, longitude: float, db: Session = Depends(ge
     return item[1:]
 
 
-@app.get("/get_using_self", response_model=List[schema.GetSelfLocation])
+@app.get("/get_using_self/", response_model=List[schema.GetSelfLocation])
 def get_loc_by_self(latitude: float, longitude: float, db: Session = Depends(get_db)):
     item = crud.get_all_location(db)
     res = list(filter(partial(get_distance_within_km, latitude, longitude), item))
