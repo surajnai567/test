@@ -28,6 +28,7 @@
  * /post_location/ args:pin,city,address,lat,longitude
     * save the location in db if the location is not exist and also there is
     no pin code available within 5 km range
+    ![alt text](https://raw.githubusercontent.com/surajnai567/test/master/img/postloc.JPG)
  
  * /get_using_postgres/ args:float, float Return: List of location
     * it fetch all location with in 5 km
@@ -41,4 +42,5 @@
     ![alt text](https://raw.githubusercontent.com/surajnai567/test/master/img/getself.JPG)
     
   * /detect/ args: float, float return: place_name and area in which the place falls.
+    * take latitude and longitude as float and return the place where this values falls.
     ![alt text](https://raw.githubusercontent.com/surajnai567/test/master/img/detect.JPG)
