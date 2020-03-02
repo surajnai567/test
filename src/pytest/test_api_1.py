@@ -1,6 +1,8 @@
 import requests
 import csv
 
+"""file to test /get_location/ api"""
+
 url = 'http://127.0.0.1:8000/get_location/'
 file_path = "C:\\Users\\ani\\Desktop\\india.csv"
 
@@ -28,7 +30,8 @@ def test_get_location():
     """test function for testing get_location end points"""
     for place, admin, lat, lon in get_data_for_check(file_path):
         response = requests.get(url, params=get_param(lat, lon))
+        print(response.text)
         assert response.json()[0]['place_name'] == place
-        assert response.json()[0]['admin'] == admin
+        assert response.json()[0]['city'] == admin
 
 
