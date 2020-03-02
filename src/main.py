@@ -64,8 +64,12 @@ def get_loc_by_self(latitude: float, longitude: float, db: Session = Depends(get
 
 @app.get('/detect/')
 def get_detected_parent_city(latitude: float, longitude: float, db: Session = Depends(get_db)):
-    item = crud.get_city_within(db, latitude, longitude)
-    res = {'name': item[0], 'parent': item[1]}
-    return res
+    try:
+        item = crud.get_city_within(db, latitude, longitude)
+        res = {'name': item[0], 'parent': item[1]}
+        return res
+    except:
+        return {"response": "no place found"}
+
 
 
