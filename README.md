@@ -23,7 +23,7 @@
  
  ### api end-points
  * /get_location/ args: float, float Return: list of locations
- ![alt text](https://raw.githubusercontent.com/surajnai567/test/master/img/getloc.jpg)
+ ![alt text](https://raw.githubusercontent.com/surajnai567/test/master/img/getloc.JPG)
  
  * /post_location/ args:pin,city,address,lat,longitude
  
