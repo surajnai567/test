@@ -23,6 +23,7 @@
  
  ### api end-points
  * /get_location/ args: float, float Return: list of locations
+ ![img](getlog.jpg)
  
  * /post_location/ args:pin,city,address,lat,longitude
  
