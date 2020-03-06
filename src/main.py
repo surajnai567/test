@@ -7,6 +7,9 @@ from src.db import SessionLocal, engine
 from src.utils.distance import get_distance_within_km
 from functools import partial
 
+from fastapi import BackgroundTasks
+from worker.celery_app import celery_app
+
 model.Base.metadata.create_all(bind=engine)
 app = FastAPI()
 # Dependency
@@ -70,6 +73,22 @@ def get_detected_parent_city(latitude: float, longitude: float, db: Session = De
         return res
     except:
         return {"response": "no place found"}
+
+
+
+def celery_on_message(body):
+    print(body)
+
+
+def background_message(task):
+    print(task.get(on_message=celery_on_message, propogate=False ))
+
+@app.get("{words}")
+def test(words: str, background_task: BackgroundTasks):
+    task = celery_app.send_task("worker.celery_worker.test_celery", args=[words])
+    print(task)
+    background_task.add_task(background_message, task)
+    return {"recieved"}
 
 
 
