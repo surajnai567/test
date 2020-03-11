@@ -19,11 +19,5 @@ def parse_json(file_name):
             yield json.dumps(feature['properties']), json.dumps(feature['geometry'])
 
 
-db = DBConnection(database=database, user=user, host=host, password=password)
-cur = db.connect()
-cur.execute(get_parent_city(100, 100))
-for i in cur.fetchall():
-    print(i)
-
-db.close()
+ 
 
