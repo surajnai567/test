@@ -91,4 +91,9 @@ def test(words: str, background_task: BackgroundTasks):
     return {"recieved"}
 
 
+@app.get("/")
+def index():
+    return {"messege":"hello world"}
+
+
 
