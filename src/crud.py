@@ -2,15 +2,18 @@ from sqlalchemy.orm import Session
 from src import model, schema
 from sqlalchemy import text
 from src.utils import static
+from worker.celery_worker import add_location_to_db
 
 
 def create_location(db: Session, data: schema.LocationBase):
-    new_loc = model.LocationBase(key=data.pincode, latitude=data.latitude, longitude=data.longitude,
-                             accuracy=0, city=data.city, place_name=data.address)
-    db.add(new_loc)
-    db.commit()
-    db.refresh(new_loc)
-    return new_loc
+    #new_loc = model.LocationBase(key=data.pincode, latitude=data.latitude, longitude=data.longitude,
+                             #accuracy=0, city=data.city, place_name=data.address)
+    #db.add(new_loc)
+    #db.commit()
+    #db.refresh(new_loc)
+
+    add_location_to_db.delay(data.json())
+    return {"message": "added data successful"}
 
 
 def get_location(db: Session, latitude: float, longitude: float):

@@ -76,24 +76,5 @@ def get_detected_parent_city(latitude: float, longitude: float, db: Session = De
 
 
 
-def celery_on_message(body):
-    print(body)
-
-
-def background_message(task):
-    print(task.get(on_message=celery_on_message, propogate=False ))
-
-@app.get("{words}")
-def test(words: str, background_task: BackgroundTasks):
-    task = celery_app.send_task("worker.celery_worker.test_celery", args=[words])
-    print(task)
-    background_task.add_task(background_message, task)
-    return {"recieved"}
-
-
-@app.get("/")
-def index():
-    return {"messege":"hello world"}
-
 
 
