@@ -4,6 +4,9 @@
     * this module contain all the logic for geojson parsing and loading it into 
     db
  * pytest this module contain all the test logic for testing all end points.
+ * worker 
+    * this module deals with the celery process for inserting data into
+    database.
  
  * utils all the utilities functions
     * distance.py module contain self implemented distance 
