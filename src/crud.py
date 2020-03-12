@@ -11,8 +11,10 @@ def create_location(db: Session, data: schema.LocationBase):
     #db.add(new_loc)
     #db.commit()
     #db.refresh(new_loc)
-
+    a = data.json()
+    print(a)
     add_location_to_db.delay(data.json())
+
     return {"message": "added data successful"}
 
 
