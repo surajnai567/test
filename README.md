@@ -28,6 +28,7 @@
  * /post_location/ args:pin,city,address,lat,longitude
     * save the location in db if the location is not exist and also there is
     no pin code available within 5 km range
+    * it uses celery worker for inserting data to the database
     * ![alt text](https://raw.githubusercontent.com/surajnai567/test/master/img/postloc.JPG)
  
  * /get_using_postgres/ args:float, float Return: List of location
